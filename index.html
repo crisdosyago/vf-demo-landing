@@ -76,6 +76,35 @@
     letter-spacing: normal;
   }
 
+  span.price {
+    position: absolute;
+    top: 3em;
+    text-align: center;
+    font-weight: bold;
+    font-size: 162%;
+  }
+
+  dl {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    max-width: 200px;
+  }
+
+  dl dd {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+    background-color: lavender;
+    color: var(--black);
+    border-bottom: thin solid var(--soft);
+    margin-bottom: 0.2em;
+  }
+
+  dl dd:nth-of-type(2n+1) {
+  }
+
   p.cent {
     text-align: center;
   }
@@ -125,7 +154,6 @@
     --col: var(--red);
   }
 
-
   section.try-or-buy {
     display: flex;
     flex-wrap: wrap;
@@ -156,14 +184,16 @@
 
     width: 100%;
     height: 80%;
+    max-width: var(--box-w);
 
     border-radius: var(--big-rad);
     border: none;
     background-color: var(--white);
 
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   form fieldset legend {
@@ -217,6 +247,19 @@
     <form method=GET action=https://guest:vfpdemo@demo-vfp.dosyago.com/>
       <fieldset>
         <legend>Free Demo</legend>
+        <span class=price>
+          $0 
+        </span>
+        <small>No credit card or email required</small>
+        <dl>
+          <dd>Native browser features
+          <dd>Low latency rendering
+          <dd>Remote isolated browser
+          <dd>Dedicated server
+          <dd>Fast network
+          <dd>Secure document viewer 
+          <dd>Many <a href=https://github.com/i5ik/ViewFinder#progress--roadmap>more features</a>
+        </dl>
         <p class=cent>
           <button class=free-do>Try it now</button>
         </p>
@@ -225,6 +268,18 @@
     <form method=GET action=#buy-basic-tier>
       <fieldset>
         <legend>1TB data</legend>
+        <span class=price>
+          $15/mo
+        </span>
+        <strong>Everything in Free PLUS</strong>
+        <dl>
+          <dd>Single-tenant server
+          <dd>1 vCPU core
+          <dd>2 GB RAM
+          <dd>1&ndash;1.5 TB data
+          <dd>Geographically close server
+          <dd>Email support
+        </dl>
         <p class=cent>
           <button
             class=cta
@@ -236,6 +291,18 @@
     <form method=GET action=#buy-expert-tier>
       <fieldset>
         <legend>8GB &#xd7; 4 cores</legend>
+        <span class=price>
+          $57/mo
+        </span>
+        <strong>Everything in Free PLUS</strong>
+        <dl>
+          <dd>Single-tenant server
+          <dd>4 vCPU cores
+          <dd>8 GB RAM
+          <dd>4 TB data
+          <dd>Fastest networks
+          <dd>Priority support
+        </dl>
         <p class=cent>
           <button
             class=cta-big
