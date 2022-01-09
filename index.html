@@ -6,12 +6,18 @@
   :root {
     --font: ui-rounded, ui-sans-serif, system-ui, sans-serif;
 
+    --deep: navy;
     --black: #100503;
     --white: #f1f3ff;
     --soft: silver;
+    --softer: whitesmoke;
 
     --blue: dodgerblue;
     --green: chartreuse;
+    --red: deeppink;
+
+    --springgreen: #00ff7fff;
+    --turquoise: #40e0d0aa;
 
 
     --txt: var(--black);
@@ -19,11 +25,15 @@
     --md-bold: 600;
     --gold: 1.618em;
     --ogold: 0.618em;
+    --big-rad: 1em;
 
     --down-spread: 1px;
     --up-spread: 2px;
     --lift-spread: 3px;
     --spread: var(--up-spread);
+
+    --box-w: 280px;
+    --box-h: 500px;
   }
 
   :root {
@@ -31,8 +41,39 @@
     font-family: var(--font);
   }
 
+  body {
+    margin: 0;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    margin: 0;
+    margin-bottom: var(--gold);
+    padding: 0.5em;
+    
+    background: linear-gradient(to right, var(--springgreen), var(--turquoise));
+
+    display: block;
+  }
+
   h1 {
     margin: 0;
+    cursor: default;
+  }
+
+  header h1 {
+    color: var(--deep);
+    letter-spacing: -1px;
+  }
+
+  header h1 a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 300;
+    letter-spacing: normal;
   }
 
   p.cent {
@@ -69,36 +110,81 @@
     top: 2px;
   }
 
+  .free-do {
+    --txt: var(--deep);
+    --col: var(--green);
+  }
+
   .cta {
     --txt: var(--white);
     --col: var(--blue);
   }
 
-  .free-do {
-    --txt: var(--black);
-    --col: var(--green);
+  .cta-big {
+    --txt: var(--softer);
+    --col: var(--red);
   }
+
 
   section.try-or-buy {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
+
   section.try-or-buy form {
     position: relative;
-    min-width: 280px;
-    min-height: 500px;
+    min-width: var(--box-w);
+    min-height: var(--box-h);
     box-sizing: border-box;
 
     margin: 1em;
-    padding: 0.75em 0.5em;
+    padding: 1em;
 
     border: thin solid var(--soft);
-    border-radius: 1em;
+    border-radius: var(--big-rad);
 
     display: flex;
     justify-content: center;
     align-items: flex-end;
+
+    background: linear-gradient(to right, purple, dodgerblue);
+  }
+
+  form fieldset {
+    position: relative;
+
+    width: 100%;
+    height: 80%;
+
+    border-radius: var(--big-rad);
+    border: none;
+    background-color: var(--white);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  form fieldset legend {
+    top: 0;
+    position: absolute;
+    max-width: var(--box-w);
+    word-break: break-word;
+    text-align: center;
+    font-weight: bold;
+    font-variant: small-caps;
+    line-height: var(--ogold);
+    font-size: 50pt;
+    text-stroke: 3px black;
+    -webkit-text-stroke: 3px black;
+
+    font-style: italic;
+    pointer-events: none;
+
+    transform: translate(0, -85%) rotate(-15deg);
+    background: transparent;
+    color: white;
   }
 </style>
 <style>
@@ -122,28 +208,41 @@
 </style>
 <title>Free Browsers | VF Individual Demo</title>
 <main>
-  <h1>VF Individual</h1>
+  <header>
+  <h1>
+    <a href=https://github.com/i5ik/Viewfinder>Viewfinder</a> Individual
+  </h1>
+  </header>
   <section class="try-or-buy">
     <form method=GET action=https://guest:vfpdemo@demo-vfp.dosyago.com/>
-      <p class=cent>
-        <button class=free-do>Try it now</button>
-      </p>
+      <fieldset>
+        <legend>Free Demo</legend>
+        <p class=cent>
+          <button class=free-do>Try it now</button>
+        </p>
+      </fieldset>
     </form>
     <form method=GET action=#buy-basic-tier>
-      <p class=cent>
-        <button
-          class=cta
-          formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx    
-        >Buy Basic Tier</button>
-      </p>
+      <fieldset>
+        <legend>1TB data</legend>
+        <p class=cent>
+          <button
+            class=cta
+            formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx    
+          >Buy Basic Tier</button>
+        </p>
+      </fieldset>
     </form>
     <form method=GET action=#buy-expert-tier>
-      <p class=cent>
-        <button
-          class=cta
-          formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx
-        >Buy Expert Tier</button>
-      </p>
+      <fieldset>
+        <legend>8GB &#xd7; 4 cores</legend>
+        <p class=cent>
+          <button
+            class=cta-big
+            formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx
+          >Buy Expert Tier</button>
+        </p>
+      </fieldset>
     </form>
   </section>
 </main>
