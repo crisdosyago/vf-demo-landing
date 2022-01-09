@@ -1,0 +1,23 @@
+{
+  "name": "vf-demo-landing",
+  "version": "1.0.0",
+  "description": "VF Demo landing page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailer": "npx tailwindcss -i input.css -o output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i5ik/vf-demo-landing.git"
+  },
+  "author": "@dosy",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/i5ik/vf-demo-landing/issues"
+  },
+  "homepage": "https://github.com/i5ik/vf-demo-landing#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.0.12"
+  }
+}
