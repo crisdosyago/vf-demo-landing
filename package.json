@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/i5ik/vf-demo-landing/issues"
   },
-  "homepage": "https://github.com/i5ik/vf-demo-landing#readme",
-  "devDependencies": {
-    "tailwindcss": "^3.0.12"
-  }
+  "homepage": "https://github.com/i5ik/vf-demo-landing#readme"
 }
