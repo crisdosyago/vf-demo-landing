@@ -16,7 +16,7 @@
 
     --txt: var(--black);
 
-    --md-bold: 400;
+    --md-bold: 600;
     --gold: 1.618em;
     --ogold: 0.618em;
 
@@ -24,6 +24,15 @@
     --up-spread: 2px;
     --lift-spread: 3px;
     --spread: var(--up-spread);
+  }
+
+  :root {
+    background: var(--white);
+    font-family: var(--font);
+  }
+
+  h1 {
+    margin: 0;
   }
 
   p.cent {
@@ -46,7 +55,7 @@
     color: var(--txt);
     background-color: var(--col);
 
-    --umbra: var(--spread) var(--spread) var(--spread);
+    --umbra: var(--spread) var(--spread) calc(var(--spread) / 2);
     box-shadow: 0 var(--umbra) var(--soft);
   }
 
@@ -60,8 +69,6 @@
     top: 2px;
   }
 
-
-
   .cta {
     --txt: var(--white);
     --col: var(--blue);
@@ -72,25 +79,65 @@
     --col: var(--green);
   }
 
-  .free
+  section.try-or-buy {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  section.try-or-buy form {
+    position: relative;
+    min-width: 280px;
+    min-height: 500px;
+    box-sizing: border-box;
+
+    margin: 1em;
+    padding: 0.75em 0.5em;
+
+    border: thin solid var(--soft);
+    border-radius: 1em;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+</style>
+<style>
+  .decor {
+    display: block;
+    width: 200vmax;
+    height: 100vh;
+    left: calc(calc(100vw - 200vmax) / 2);
+    
+
+    /* idempotent */
+    position: absolute;
+    pointer-events: none;
+    z-index: -100;
+
+    transform: translate3d(0,0,0);
+  }
+  .bg-1 {
+    top: -50vh;
+  }
 </style>
 <title>Free Browsers | VF Individual Demo</title>
 <main>
-  <section class=try>
+  <h1>VF Individual</h1>
+  <section class="try-or-buy">
     <form method=GET action=https://guest:vfpdemo@demo-vfp.dosyago.com/>
       <p class=cent>
         <button class=free-do>Try it now</button>
       </p>
     </form>
-  </section>
-  <section class=buy>
-    <form method=GET action=#click-a-buy-link>
+    <form method=GET action=#buy-basic-tier>
       <p class=cent>
         <button
           class=cta
           formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx    
         >Buy Basic Tier</button>
       </p>
+    </form>
+    <form method=GET action=#buy-expert-tier>
       <p class=cent>
         <button
           class=cta
