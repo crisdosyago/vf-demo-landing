@@ -1,25 +1,85 @@
 <!DOCTYPE html>
 <html lang=en>
 <meta name=viewport content=width=device-width,initial-scale=1>
+<link rel=stylesheet href=style.css>
 <style>
+  :root {
+    --font: ui-rounded, ui-sans-serif, system-ui, sans-serif;
+
+    --black: #100503;
+    --white: #f1f3ff;
+    --soft: silver;
+
+    --blue: dodgerblue;
+    --green: chartreuse;
+
+
+    --txt: var(--black);
+
+    --md-bold: 400;
+    --gold: 1.618em;
+    --ogold: 0.618em;
+
+    --down-spread: 1px;
+    --up-spread: 2px;
+    --lift-spread: 3px;
+    --spread: var(--up-spread);
+  }
+
   p.cent {
     text-align: center;
   }
   
   button {
-    color: white;
-    font-weight: bold;
+    position: relative;
     font-size: larger;
-    background-color: dodgerblue;
+    line-height: var(--gold);
+
+    font-family: var(--font);
+    font-weight: var(--md-bold);
+
+    padding: 0 var(--ogold);
+
     border-radius: 0.25em;
+    border: thin solid var(--col);
+
+    color: var(--txt);
+    background-color: var(--col);
+
+    --umbra: var(--spread) var(--spread) var(--spread);
+    box-shadow: 0 var(--umbra) var(--soft);
   }
+
+  button:hover {
+    --spread: var(--lift-spread);
+    top: -1px;
+  }
+
+  button:active {
+    --spread: var(--down-spread);
+    top: 2px;
+  }
+
+
+
+  .cta {
+    --txt: var(--white);
+    --col: var(--blue);
+  }
+
+  .free-do {
+    --txt: var(--black);
+    --col: var(--green);
+  }
+
+  .free
 </style>
 <title>Free Browsers | VF Individual Demo</title>
 <main>
   <section class=try>
     <form method=GET action=https://guest:vfpdemo@demo-vfp.dosyago.com/>
       <p class=cent>
-        <button>Try it now</button>
+        <button class=free-do>Try it now</button>
       </p>
     </form>
   </section>
@@ -27,11 +87,13 @@
     <form method=GET action=#click-a-buy-link>
       <p class=cent>
         <button
-            formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx    
+          class=cta
+          formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx    
         >Buy Basic Tier</button>
       </p>
       <p class=cent>
         <button
+          class=cta
           formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx
         >Buy Expert Tier</button>
       </p>
