@@ -93,6 +93,7 @@
     }
 
     dl dd {
+      text-align: center;
       margin: 0;
       font-size: 1rem;
       line-height: 1.3;
@@ -380,6 +381,7 @@
       }
     ];
     let locked = false;
+    let locking = false;
 
     self.loadBrowser = loadBrowser;
 
@@ -434,14 +436,18 @@
 
     function lockScroll() {
       locked = true;
-      console.log('locked', locked);
-      document.documentElement.style.overflow = 'hidden';
+      locking = setTimeout(() => {
+        document.documentElement.style.overflow = 'hidden';
+        console.log('locked', locked);
+      }, 600);
     }
 
     function unlockScroll() {
       locked = false;
-      console.log('locked', locked);
+      clearTimeout(locking);
+      locking = false;
       document.documentElement.style.overflow = 'auto';
+      console.log('locked', locked);
     }
 
     function isMobile() {
