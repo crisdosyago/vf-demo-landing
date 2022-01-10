@@ -343,6 +343,7 @@
   </main>
 <script>
   {
+    const MobilePlatform = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     const API = 'https://demo-vfp.dosyago.com/v1';
     const TokenURL = () => new URL(`${API}/token`);
     const PayURL = () => new URL(`${API}/paid`);
@@ -378,6 +379,7 @@
         type: 'json'
       }
     ];
+    let locked = false;
 
     self.loadBrowser = loadBrowser;
 
@@ -389,6 +391,8 @@
       const frame = document.documentElement.querySelector('iframe.remote-browser-portal');
       let failed = false;
       let previous;
+
+      installScrollLock(frame);
 
       for( const {url,request,type:type = 'text'} of Steps ) {
         const resp = await fetch(url(previous), request(previous));
@@ -413,15 +417,41 @@
           },
           200
         );
+      } else {
+        setTimeout(() => {
+            event.target.querySelector('button').disabled = false;
+          },
+          500
+        );
       }
 
-      setTimeout(() => {
-          event.target.querySelector('button').disabled = false;
-        },
-        500
-      );
-
       return false;
+    }
+    
+    function installScrollLock(target) {
+      target.addEventListener('pointerenter', lockScroll);
+      target.addEventListener('pointerleave', unlockScroll);
+      globalThis.addEventListener('wheel', wheeling => {
+        if ( locked ) wheeling.preventDefault();
+      });
+    }
+
+    function lockScroll() {
+      locked = true;
+      if ( isMobile() ) {
+        document.documentElement.style.overflow = 'hidden';
+      }
+    }
+
+    function unlockScroll() {
+      locked = false;
+      if ( isMobile() ) {
+        document.documentElement.style.overflow = 'auto';
+      }
+    }
+
+    function isMobile() {
+      return MobilePlatform.test(navigator.userAgent);
     }
   }
 </script>
