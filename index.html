@@ -1,315 +1,372 @@
 <!DOCTYPE html>
-<html lang=en>
-<meta name=viewport content=width=device-width,initial-scale=1>
-<link rel=stylesheet href=style.css>
-<style>
-  :root {
-    --font: ui-rounded, ui-sans-serif, system-ui, sans-serif;
+  <html lang=en>
+  <meta name=viewport content=width=device-width,initial-scale=1>
+  <link rel=stylesheet href=style.css>
+  <style>
+    :root {
+      --font: ui-rounded, ui-sans-serif, system-ui, sans-serif;
 
-    --deep: navy;
-    --black: #100503;
-    --white: #f1f3ff;
-    --soft: silver;
-    --softer: whitesmoke;
+      --deep: navy;
+      --black: #100503;
+      --white: #f1f3ff;
+      --soft: silver;
+      --softer: whitesmoke;
 
-    --blue: dodgerblue;
-    --green: chartreuse;
-    --red: deeppink;
+      --blue: dodgerblue;
+      --green: chartreuse;
+      --red: deeppink;
 
-    --springgreen: #00ff7fff;
-    --turquoise: #40e0d0aa;
+      --springgreen: #00ff7fff;
+      --turquoise: #40e0d0aa;
 
 
-    --txt: var(--black);
+      --txt: var(--black);
 
-    --md-bold: 600;
-    --gold: 1.618em;
-    --ogold: 0.618em;
-    --big-rad: 1em;
+      --md-bold: 600;
+      --gold: 1.618em;
+      --ogold: 0.618em;
+      --big-rad: 1em;
 
-    --down-spread: 1px;
-    --up-spread: 2px;
-    --lift-spread: 3px;
-    --spread: var(--up-spread);
+      --down-spread: 1px;
+      --up-spread: 2px;
+      --lift-spread: 3px;
+      --spread: var(--up-spread);
 
-    --box-w: 280px;
-    --box-h: 500px;
-  }
+      --box-w: 280px;
+      --box-h: 500px;
+    }
 
-  :root {
-    background: var(--white);
-    font-family: var(--font);
-  }
+    :root {
+      background: var(--white);
+      font-family: var(--font);
+    }
 
-  body {
-    margin: 0;
-  }
+    body {
+      margin: 0;
+    }
 
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
 
-    margin: 0;
-    margin-bottom: var(--gold);
-    padding: 0.5em;
+      margin: 0;
+      margin-bottom: var(--gold);
+      padding: 0.5em;
+      
+      background: linear-gradient(to right, var(--springgreen), var(--turquoise));
+
+      display: block;
+    }
+
+    h1 {
+      margin: 0;
+      cursor: default;
+    }
+
+    header h1 {
+      color: var(--deep);
+      letter-spacing: -1px;
+    }
+
+    header h1 a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 300;
+      letter-spacing: normal;
+    }
+
+    span.price {
+      position: absolute;
+      top: 3em;
+      text-align: center;
+      font-weight: bold;
+      font-size: 162%;
+    }
+
+    dl {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+      max-width: 200px;
+    }
+
+    dl dd {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.3;
+      background-color: lavender;
+      color: var(--black);
+      border-bottom: thin solid var(--soft);
+      margin-bottom: 0.2em;
+    }
+
+    dl dd:nth-of-type(2n+1) {
+    }
+
+    p.cent {
+      text-align: center;
+    }
     
-    background: linear-gradient(to right, var(--springgreen), var(--turquoise));
+    button {
+      position: relative;
+      font-size: larger;
+      line-height: var(--gold);
 
-    display: block;
+      font-family: var(--font);
+      font-weight: var(--md-bold);
+
+      padding: 0 var(--ogold);
+
+      border-radius: 0.25em;
+      border: thin solid var(--col);
+
+      color: var(--txt);
+      background-color: var(--col);
+
+      --umbra: var(--spread) var(--spread) calc(var(--spread) / 2);
+      box-shadow: 0 var(--umbra) var(--soft);
+    }
+
+    button[disabled] {
+      opacity: 0.8;
+      filter: sepia(1.2);
+    }
+
+    button:hover:not([disabled]) {
+      --spread: var(--lift-spread);
+      top: -1px;
+    }
+
+    button:active {
+      --spread: var(--down-spread);
+      top: 2px;
+    }
+
+    .free-do {
+      --txt: var(--deep);
+      --col: var(--green);
+    }
+
+    .cta {
+      --txt: var(--white);
+      --col: var(--blue);
+    }
+
+    .cta-big {
+      --txt: var(--softer);
+      --col: var(--red);
+    }
+
+    section.try-or-buy {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    section.try-or-buy form {
+      position: relative;
+      min-width: var(--box-w);
+      min-height: var(--box-h);
+      box-sizing: border-box;
+
+      margin: 1em;
+      padding: 1em;
+
+      border: thin solid var(--soft);
+      border-radius: var(--big-rad);
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+
+      background: linear-gradient(to right, purple, dodgerblue);
+    }
+
+    form fieldset {
+      position: relative;
+
+      width: 100%;
+      height: 80%;
+      max-width: var(--box-w);
+
+      border-radius: var(--big-rad);
+      border: none;
+      background-color: var(--white);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    form fieldset legend {
+      top: 0;
+      position: absolute;
+      max-width: var(--box-w);
+      word-break: break-word;
+      text-align: center;
+      font-weight: bold;
+      font-variant: small-caps;
+      line-height: var(--ogold);
+      font-size: 50pt;
+      text-stroke: 3px black;
+      -webkit-text-stroke: 3px black;
+
+      font-style: italic;
+      pointer-events: none;
+
+      transform: translate(0, -85%) rotate(-15deg);
+      background: transparent;
+      color: white;
+    }
+  </style>
+  <style>
+    .decor {
+      display: block;
+      width: 200vmax;
+      height: 100vh;
+      left: calc(calc(100vw - 200vmax) / 2);
+      
+
+      /* idempotent */
+      position: absolute;
+      pointer-events: none;
+      z-index: -100;
+
+      transform: translate3d(0,0,0);
+    }
+    .bg-1 {
+      top: -50vh;
+    }
+  </style>
+  <title>Free Browsers | VF Individual Demo</title>
+  <main>
+    <header>
+    <h1>
+      <a href=https://github.com/i5ik/Viewfinder>Viewfinder</a> Individual
+    </h1>
+    </header>
+    <section class="try-or-buy">
+      <form onsubmit=loadBrowser(event); method=GET action=#loading-your-browser>
+        <fieldset>
+          <legend>Free Demo</legend>
+          <span class=price>
+            $0 
+          </span>
+          <small>No credit card or email required</small>
+          <dl>
+            <dd>Native browser features
+            <dd>Low latency rendering
+            <dd>Remote isolated browser
+            <dd>Dedicated server
+            <dd>Fast network
+            <dd>Secure document viewer 
+            <dd>Many <a href=https://github.com/i5ik/ViewFinder#progress--roadmap>more features</a>
+          </dl>
+          <p class=cent>
+            <button class=free-do>Try it now</button>
+          </p>
+        </fieldset>
+      </form>
+      <form method=GET action=#buy-basic-tier>
+        <fieldset>
+          <legend>1TB data</legend>
+          <span class=price>
+            $15/mo
+          </span>
+          <strong>Everything in Free PLUS</strong>
+          <dl>
+            <dd>Single-tenant server
+            <dd>1 vCPU core
+            <dd>2 GB RAM
+            <dd>1&ndash;1.5 TB data
+            <dd>Geographically close server
+            <dd>Email support
+          </dl>
+          <p class=cent>
+            <button
+              class=cta
+              formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx    
+            >Buy Basic Tier</button>
+          </p>
+        </fieldset>
+      </form>
+      <form method=GET action=#buy-expert-tier>
+        <fieldset>
+          <legend>8GB &#xd7; 4 cores</legend>
+          <span class=price>
+            $57/mo
+          </span>
+          <strong>Everything in Free PLUS</strong>
+          <dl>
+            <dd>Single-tenant server
+            <dd>4 vCPU cores
+            <dd>8 GB RAM
+            <dd>4 TB data
+            <dd>Fastest networks
+            <dd>Priority support
+          </dl>
+          <p class=cent>
+            <button
+              class=cta-big
+              formaction=https://buy.stripe.com/7sI8xIeKd1Qn3zG28H
+            >Buy Expert Tier</button>
+          </p>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+<script>
+  {
+    const API = 'https://demo-vfp.dosyago.com/v1';
+    const TokenURL = () => new URL(`${API}/token`);
+    const PayURL = () => new URL(`${API}/paid`);
+    const ReceiveURL = () => new URL(`${API}/fulfill`);
+    const Steps = [
+      {
+        url: TokenURL,
+        request: () => ({
+          method: 'POST'
+        })
+      },
+    ];
+
+    self.loadBrowser = loadBrowser;
+
+    async function loadBrowser(event) {
+      event.preventDefault();
+
+      event.target.querySelector('button').disabled = true;
+
+      let failed = false;
+      let previous;
+
+      for( const {url,request,type:type = 'text'} of Steps ) {
+        const resp = await fetch(url(previous), request(previous));
+        if ( resp.error || ! resp.ok ) {
+          failed = true;
+          const message = `Auth failed: ${resp.error}`;
+          console.warn(message);
+          alert(message);
+          break;
+        }
+        const data = await resp[type]();
+        previous = data;
+      }
+
+      if ( !failed ) {
+        alert('Starting browser');
+        alert(JSON.stringify(previous, null, 2));
+      }
+
+      setTimeout(
+        () => event.target.querySelector('button').disabled = false,
+        500
+      );
+
+      return false;
+    }
   }
-
-  h1 {
-    margin: 0;
-    cursor: default;
-  }
-
-  header h1 {
-    color: var(--deep);
-    letter-spacing: -1px;
-  }
-
-  header h1 a {
-    text-decoration: none;
-    color: var(--white);
-    font-weight: 300;
-    letter-spacing: normal;
-  }
-
-  span.price {
-    position: absolute;
-    top: 3em;
-    text-align: center;
-    font-weight: bold;
-    font-size: 162%;
-  }
-
-  dl {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100%;
-    max-width: 200px;
-  }
-
-  dl dd {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.3;
-    background-color: lavender;
-    color: var(--black);
-    border-bottom: thin solid var(--soft);
-    margin-bottom: 0.2em;
-  }
-
-  dl dd:nth-of-type(2n+1) {
-  }
-
-  p.cent {
-    text-align: center;
-  }
-  
-  button {
-    position: relative;
-    font-size: larger;
-    line-height: var(--gold);
-
-    font-family: var(--font);
-    font-weight: var(--md-bold);
-
-    padding: 0 var(--ogold);
-
-    border-radius: 0.25em;
-    border: thin solid var(--col);
-
-    color: var(--txt);
-    background-color: var(--col);
-
-    --umbra: var(--spread) var(--spread) calc(var(--spread) / 2);
-    box-shadow: 0 var(--umbra) var(--soft);
-  }
-
-  button:hover {
-    --spread: var(--lift-spread);
-    top: -1px;
-  }
-
-  button:active {
-    --spread: var(--down-spread);
-    top: 2px;
-  }
-
-  .free-do {
-    --txt: var(--deep);
-    --col: var(--green);
-  }
-
-  .cta {
-    --txt: var(--white);
-    --col: var(--blue);
-  }
-
-  .cta-big {
-    --txt: var(--softer);
-    --col: var(--red);
-  }
-
-  section.try-or-buy {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  section.try-or-buy form {
-    position: relative;
-    min-width: var(--box-w);
-    min-height: var(--box-h);
-    box-sizing: border-box;
-
-    margin: 1em;
-    padding: 1em;
-
-    border: thin solid var(--soft);
-    border-radius: var(--big-rad);
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-
-    background: linear-gradient(to right, purple, dodgerblue);
-  }
-
-  form fieldset {
-    position: relative;
-
-    width: 100%;
-    height: 80%;
-    max-width: var(--box-w);
-
-    border-radius: var(--big-rad);
-    border: none;
-    background-color: var(--white);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  form fieldset legend {
-    top: 0;
-    position: absolute;
-    max-width: var(--box-w);
-    word-break: break-word;
-    text-align: center;
-    font-weight: bold;
-    font-variant: small-caps;
-    line-height: var(--ogold);
-    font-size: 50pt;
-    text-stroke: 3px black;
-    -webkit-text-stroke: 3px black;
-
-    font-style: italic;
-    pointer-events: none;
-
-    transform: translate(0, -85%) rotate(-15deg);
-    background: transparent;
-    color: white;
-  }
-</style>
-<style>
-  .decor {
-    display: block;
-    width: 200vmax;
-    height: 100vh;
-    left: calc(calc(100vw - 200vmax) / 2);
-    
-
-    /* idempotent */
-    position: absolute;
-    pointer-events: none;
-    z-index: -100;
-
-    transform: translate3d(0,0,0);
-  }
-  .bg-1 {
-    top: -50vh;
-  }
-</style>
-<title>Free Browsers | VF Individual Demo</title>
-<main>
-  <header>
-  <h1>
-    <a href=https://github.com/i5ik/Viewfinder>Viewfinder</a> Individual
-  </h1>
-  </header>
-  <section class="try-or-buy">
-    <form method=GET action=https://guest:vfpdemo@demo-vfp.dosyago.com/>
-      <fieldset>
-        <legend>Free Demo</legend>
-        <span class=price>
-          $0 
-        </span>
-        <small>No credit card or email required</small>
-        <dl>
-          <dd>Native browser features
-          <dd>Low latency rendering
-          <dd>Remote isolated browser
-          <dd>Dedicated server
-          <dd>Fast network
-          <dd>Secure document viewer 
-          <dd>Many <a href=https://github.com/i5ik/ViewFinder#progress--roadmap>more features</a>
-        </dl>
-        <p class=cent>
-          <button class=free-do>Try it now</button>
-        </p>
-      </fieldset>
-    </form>
-    <form method=GET action=#buy-basic-tier>
-      <fieldset>
-        <legend>1TB data</legend>
-        <span class=price>
-          $15/mo
-        </span>
-        <strong>Everything in Free PLUS</strong>
-        <dl>
-          <dd>Single-tenant server
-          <dd>1 vCPU core
-          <dd>2 GB RAM
-          <dd>1&ndash;1.5 TB data
-          <dd>Geographically close server
-          <dd>Email support
-        </dl>
-        <p class=cent>
-          <button
-            class=cta
-            formaction=https://buy.stripe.com/dR615g7hL0Mjeek5kx    
-          >Buy Basic Tier</button>
-        </p>
-      </fieldset>
-    </form>
-    <form method=GET action=#buy-expert-tier>
-      <fieldset>
-        <legend>8GB &#xd7; 4 cores</legend>
-        <span class=price>
-          $57/mo
-        </span>
-        <strong>Everything in Free PLUS</strong>
-        <dl>
-          <dd>Single-tenant server
-          <dd>4 vCPU cores
-          <dd>8 GB RAM
-          <dd>4 TB data
-          <dd>Fastest networks
-          <dd>Priority support
-        </dl>
-        <p class=cent>
-          <button
-            class=cta-big
-            formaction=https://buy.stripe.com/7sI8xIeKd1Qn3zG28H
-          >Buy Expert Tier</button>
-        </p>
-      </fieldset>
-    </form>
-  </section>
-</main>
+</script>
