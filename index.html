@@ -432,26 +432,18 @@
       target.addEventListener('mouseleave', lockScroll);
       target.addEventListener('pointerenter', lockScroll);
       target.addEventListener('pointerleave', unlockScroll);
-      globalThis.addEventListener('wheel', wheeling => {
-        console.log(locked, wheeling);
-        if ( locked ) wheeling.preventDefault();
-      }, {passive: false, capture: true});
     }
 
     function lockScroll() {
       locked = true;
       console.log('locked', locked);
-      if ( isMobile() ) {
-        document.documentElement.style.overflow = 'hidden';
-      }
+      document.documentElement.style.overflow = 'hidden';
     }
 
     function unlockScroll() {
       locked = false;
-      console.log('locked', locked);
-      if ( isMobile() ) {
-        document.documentElement.style.overflow = 'auto';
-      }
+      console.log(locked);
+      document.documentElement.style.overflow = 'auto';
     }
 
     function isMobile() {
