@@ -431,9 +431,8 @@
       target.addEventListener('pointerenter', lockScroll);
       target.addEventListener('pointerleave', unlockScroll);
       globalThis.addEventListener('wheel', wheeling => {
-        console.log(locked, wheeling);
         if ( locked ) wheeling.preventDefault();
-      });
+      }, {passive: false, capture: true});
     }
 
     function lockScroll() {
