@@ -428,8 +428,6 @@
     }
     
     function installScrollLock(target) {
-      target.addEventListener('mouseenter', lockScroll);
-      target.addEventListener('mouseleave', lockScroll);
       target.addEventListener('pointerenter', lockScroll);
       target.addEventListener('pointerleave', unlockScroll);
     }
@@ -442,7 +440,7 @@
 
     function unlockScroll() {
       locked = false;
-      console.log(locked);
+      console.log('locked', locked);
       document.documentElement.style.overflow = 'auto';
     }
 
