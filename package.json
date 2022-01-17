@@ -4,8 +4,7 @@
   "description": "VF Demo landing page",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tailer": "npx tailwindcss -i input.css -o output.css --watch"
+    "test": "serve -p 8080"
   },
   "repository": {
     "type": "git",
@@ -16,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/i5ik/vf-demo-landing/issues"
   },
-  "homepage": "https://github.com/i5ik/vf-demo-landing#readme"
+  "homepage": "https://github.com/i5ik/vf-demo-landing#readme",
+  "devDependencies": {
+    "serve": "^13.0.2"
+  }
 }
