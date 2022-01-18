@@ -6,6 +6,7 @@
     const TokenURL = () => new URL(`${API}/token`);
     const PayURL = () => new URL(`${API}/paid`);
     const StartURL = () => new URL(`${API}/start`);
+    const loadingUrl = `/loading.html`;
     const Steps = [
       {
         url: TokenURL,
@@ -110,7 +111,11 @@
       }
       let shareWorked = false;
       try {
-        const shareResult = await navigator.share(frameSrc);
+        const shareResult = await navigator.share({
+          title: 'Viewfinder Co-browsing session',
+          text: 'I invite you to join my co-browsing session.',
+          url: frameSrc
+        });
         shareWorked = true;
       } catch(e) {
         await delaySay(`Oops, we couldn't share that link to another app. But let's try to copy it to the clipboard.`);
