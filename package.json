@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/i5ik/vf-demo-landing#readme",
   "devDependencies": {
+    "eslint": "^8.7.0",
     "serve": "^13.0.2"
   }
 }
