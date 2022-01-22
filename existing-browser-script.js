@@ -27,44 +27,64 @@
 
       event.target.querySelector('button').disabled = true;
 
-      const Fastest = [];
       let failed = true;
 
       installScrollLock(frame);
 
-      for( const url of BROWSERS ) {
+      const Fastest = await Promise.all(BROWSERS.map(async url => {
         // Notes
           // source:  StackOverflow answer
           // https://stackoverflow.com/a/66865354
+          let resolve;
           let duration = Infinity;
+          const requestEnd = new Promise(res => resolve = res);
           const resourceObserver = new PerformanceObserver((list) => {
             list.getEntries()
               // get only the one we're interested in
-              .filter(({ name }) => name === url)
-              .forEach((resource) => ({duration} = resource));
+              .forEach((resource) => {
+                if ( resource.name === url ) {
+                  ({duration} = resource);
+                  console.log(duration);
+                  resourceObserver.disconnect();
+                  resolve();
+                }
+              });
             // Disconnect after processing the events.
-            resourceObserver.disconnect();
           });
           // make it a resource observer
           resourceObserver.observe({ type: "resource" });
-        const resp = await fetch(url, {mode: 'no-cors'});
-        if ( resp.error || ! resp.ok ) {
+        try {
+          const resp = await fetch(url, {mode: 'no-cors'});
+          failed = failed && false;
+          // Note:
+            // the following properties are inaccessible with mode: no-cors
+              /*
+                if ( resp.error || ! resp.ok ) {
+                  failed = failed && true;
+                  const message = `Health check failed for 
+                    Browser (${url})
+                    with (${resp.status}: ${resp.statusText}): ${resp.error || 'error'}
+                  `;
+                  console.warn(message);
+                }
+              */
+        } catch(e) {
+          // only fail on network error or timeout
           failed = failed && true;
-          const message = `Health check failed for 
-            Browser (${url})
-            with (${resp.status}: ${resp.statusText}): ${resp.error || 'error'}
-          `;
-          console.warn(message);
+          resolve();
+          resourceObserver.disconnect();
         }
-        Fastest.push({url, duration});
-      }
+        await requestEnd;
+        return {url, duration};
+      }));
 
+      console.log(Fastest);
       if ( !failed ) {
         const fastest = Fastest.sort(
           ({duration:a},{duration:b}) => a-b
         )[0];
         const {url:loginUrl} = fastest;
-        console.log(Fastest, loginUrl);
+        console.log(loginUrl);
         frame.setAttribute('src', loginUrl);
         frame.classList.add('active');
         setTimeout(() => {
