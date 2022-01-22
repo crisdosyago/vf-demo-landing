@@ -37,18 +37,16 @@
           // source:  StackOverflow answer
           // https://stackoverflow.com/a/66865354
           let duration = Infinity;
-          const resourceObserver = new PerformanceObserver( (list) => {
+          const resourceObserver = new PerformanceObserver((list) => {
             list.getEntries()
               // get only the one we're interested in
-              .filter( ({ name }) => name === url )
-              .forEach( (resource) => {
-                ({duration}) = resource;
-              });
+              .filter(({ name }) => name === url)
+              .forEach((resource) => ({duration} = resource));
             // Disconnect after processing the events.
             resourceObserver.disconnect();
-          } );
+          });
           // make it a resource observer
-          resourceObserver.observe( { type: "resource" } );
+          resourceObserver.observe({ type: "resource" });
         const resp = await fetch(url, {mode: 'no-cors'});
         if ( resp.error || ! resp.ok ) {
           failed = failed && true;
