@@ -1,5 +1,6 @@
 
   {
+    const MAX_TIMEOUT = 4000;
     const DELAY_SAY_WAIT = 300;
     const MobilePlatform = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     const BROWSERS = [
@@ -8,6 +9,7 @@
       `https://demo-vfp-sg.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
     ];
     const loadingUrl = `/loading.html`;
+    const sleep = ms => new Promise(res => setTimeout(res, ms));
     let frame = document?.documentElement?.querySelector('iframe.remote-browser-portal');
     let locked = false;
     let locking = false;
@@ -31,54 +33,58 @@
 
       installScrollLock(frame);
 
-      const Fastest = await Promise.all(BROWSERS.map(async url => {
-        // Notes
-          // source:  StackOverflow answer
-          // https://stackoverflow.com/a/66865354
-          let resolve;
-          let duration = Infinity;
-          const requestEnd = new Promise(res => resolve = res);
-          const resourceObserver = new PerformanceObserver((list) => {
-            list.getEntries()
-              // get only the one we're interested in
-              .forEach((resource) => {
-                if ( resource.name === url ) {
-                  ({duration} = resource);
-                  console.log(duration);
-                  resourceObserver.disconnect();
-                  resolve();
-                }
-              });
-            // Disconnect after processing the events.
-          });
-          // make it a resource observer
-          resourceObserver.observe({ type: "resource" });
-        try {
-          const resp = await fetch(url, {mode: 'no-cors'});
-          failed = failed && false;
-          // Note:
-            // the following properties are inaccessible with mode: no-cors
-              /*
-                if ( resp.error || ! resp.ok ) {
-                  failed = failed && true;
-                  const message = `Health check failed for 
-                    Browser (${url})
-                    with (${resp.status}: ${resp.statusText}): ${resp.error || 'error'}
-                  `;
-                  console.warn(message);
-                }
-              */
-        } catch(e) {
-          // only fail on network error or timeout
-          failed = failed && true;
-          resolve();
-          resourceObserver.disconnect();
-        }
-        await requestEnd;
-        return {url, duration};
-      }));
+      const Fastest = await Promise.race([
+        Promise.all(BROWSERS.map(async url => {
+          // Notes
+            // source:  StackOverflow answer
+            // https://stackoverflow.com/a/66865354
+            let resolve;
+            let duration = Infinity;
+            const requestEnd = new Promise(res => resolve = res);
+            const resourceObserver = new PerformanceObserver((list) => {
+              list.getEntries()
+                // get only the one we're interested in
+                .forEach((resource) => {
+                  if ( resource.name === url ) {
+                    ({duration} = resource);
+                    console.log(duration);
+                    resourceObserver.disconnect();
+                    resolve();
+                  }
+                });
+              // Disconnect after processing the events.
+            });
+            // make it a resource observer
+            resourceObserver.observe({ type: "resource" });
+          try {
+            const resp = await fetch(url, {mode: 'no-cors'});
+            failed = failed && false;
+            // Note:
+              // the following properties are inaccessible with mode: no-cors
+                /*
+                  if ( resp.error || ! resp.ok ) {
+                    failed = failed && true;
+                    const message = `Health check failed for 
+                      Browser (${url})
+                      with (${resp.status}: ${resp.statusText}): ${resp.error || 'error'}
+                    `;
+                    console.warn(message);
+                  }
+                */
+          } catch(e) {
+            // only fail on network error or timeout
+            failed = failed && true;
+            resolve();
+            resourceObserver.disconnect();
+          }
+          await requestEnd;
+          return {url, duration};
+        })),
+        sleep(MAX_TIMEOUT)
+      ]);
 
       console.log(Fastest);
+
       if ( !failed ) {
         const fastest = Fastest.sort(
           ({duration:a},{duration:b}) => a-b
