@@ -1,6 +1,6 @@
 
   {
-    const MAX_TIMEOUT = 4000;
+    const MAX_TIMEOUT = 7000;
     const DELAY_SAY_WAIT = 300;
     const MobilePlatform = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     const BROWSERS = [
