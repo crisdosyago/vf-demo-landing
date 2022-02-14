@@ -6,8 +6,8 @@
     const BROWSERS = [
       `https://demo-vfp-sg.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
       `https://demo-vfp-us-iowa.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
-      `https://demo-vfp-uk-city.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
-      `https://demo-vfp-mumbai.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
+      /*`https://demo-vfp-uk-city.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
+      `https://demo-vfp-mumbai.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,*/
       `https://demo-vfp-us-n-virginia.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
     ];
     const loadingUrl = `/loading.html`;
