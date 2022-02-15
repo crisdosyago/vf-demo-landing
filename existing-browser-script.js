@@ -81,7 +81,7 @@
           }
           await requestEnd;
           return {url, duration};
-        })),
+        }),
         sleep(MAX_TIMEOUT)
       ]);
 
