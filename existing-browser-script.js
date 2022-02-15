@@ -11,7 +11,7 @@
       `https://demo-vfp-us-n-virginia.dosyago.com:8002/login?token=bhvNDh6XYZ&ran=${Math.random()}`,
     ];
     const loadingUrl = `/loading.html`;
-    const sleep = ms => new Promise(res => setTimeout(res, ms));
+    const sleep = (ms,v) => new Promise(res => setTimeout(() => res(v), ms));
     let frame = document?.documentElement?.querySelector('iframe.remote-browser-portal');
     let locked = false;
     let locking = false;
@@ -36,7 +36,7 @@
       installScrollLock(frame);
 
       const Fastest = await Promise.race([
-        Promise.all(BROWSERS.map(async url => {
+        ...BROWSERS.map(async url => {
           // Notes
             // source:  StackOverflow answer
             // https://stackoverflow.com/a/66865354
@@ -87,11 +87,13 @@
 
       console.log(Fastest);
 
-      if ( !failed ) {
+      if ( !failed && Fastest ) {
+        /*
         const fastest = Fastest.sort(
           ({duration:a},{duration:b}) => a-b
         )[0];
-        const {url:loginUrl} = fastest;
+        */
+        const {url:loginUrl} = Fastest;
         console.log(loginUrl);
         frame.setAttribute('src', loginUrl);
         frame.classList.add('active');
