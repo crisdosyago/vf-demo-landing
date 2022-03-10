@@ -2,6 +2,10 @@
   <html lang=en>
   <meta name=viewport content=width=device-width,initial-scale=1>
   <link rel=stylesheet href=style.css>
+	<script
+		src="https://unpkg.com/mailgo@0.12.2/dist/mailgo.min.js"
+		async
+	></script>
   <style>
     :root {
       --font: ui-rounded, ui-sans-serif, system-ui, sans-serif;
@@ -281,8 +285,9 @@
     </h1>
     </header>
     <section class="try-or-buy">
-      <form no-onsubmit=loadBrowser(event); method=GET action=mailto:cris@dosycorp.com?subject=Demo>
+      <form no-onsubmit=loadBrowser(event); method=POST action=mailto:cris@dosycorp.com>
         <fieldset>
+          <input type=hidden name=subject value=Demo>
           <legend>Free Demo</legend>
           <span class=price>
             $0 
